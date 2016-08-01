@@ -1,10 +1,11 @@
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.time.StopWatch;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+
+import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -21,24 +22,32 @@ public class TimeCountScreenShotTest {
     String email = "strong.zubovich@bk.ru";
     String password = "ZXCvbn123!";
 
+
+
 //!!! I couldn't take screenshot!!!
 
     @BeforeTest
     public void setup(){
+        System.setProperty("phantomjs.binary.path","C:\\phantomjs-2.1.1-windows\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe");
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
     }
     @Test
-    public void mailPostTest() {
+    public void mailPostTest() throws IOException {
 
         StopWatch stopWatch = new StopWatch();
 
         stopWatch.start();
 
+
+
         driver.get("https://mail.ru/");
         //public ScreenShotDifferRule screenShotDiffer = new ScreenShotDifferRule(driver);
         //BufferedImage originScreenShot = screenShotDiffer.takeOriginScreenShot(//mail.ru/);
+
+        File screenShot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(screenShot, new File("D:\\ScreenShot\\screenshot.png"));
 
         //set login
         WebElement LoginField = driver.findElement(By.cssSelector("#mailbox__login"));
