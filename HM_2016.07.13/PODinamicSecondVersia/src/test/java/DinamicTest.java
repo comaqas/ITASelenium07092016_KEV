@@ -25,27 +25,16 @@ public class DinamicTest{
 
     @Test
             public void dinamictestmail(){
-        DinamicPage page = new DinamicPage(driver);
+        LoginPage page = new LoginPage(driver);
 
         String email = "strong.zubovich@bk.ru";
         String password = "ZXCvbn123!";
         page.login(email, password);
 
-        //count letters
-        List<WebElement> numberOfCheckBox = driver.findElements(By.className("b-datalist__item__panel"));
-        int numberOfLetters = numberOfCheckBox.size();
-        System.out.println("There are " + numberOfLetters + " letters in a Box");
+        LetterPage countpage = new LetterPage(driver);
+        countpage.countletters();
 
-        int letters;
-        while (true) {
-            letters = driver.findElements(By.cssSelector("div.b-datalist__item__panel")).size();
-            System.out.println("letters " + letters);
-            if (!driver.findElement(By.cssSelector("div[data-name='next']")).getAttribute("class").contains("b-toolbar__btn_disabled")) {
-                driver.findElement(By.cssSelector("i.ico_toolbar_arrow_right")).click();
-            } else {
-                break;
-            }
-        }
+
 
     }
 
