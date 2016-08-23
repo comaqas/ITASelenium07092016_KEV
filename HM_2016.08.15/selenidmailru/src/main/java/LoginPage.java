@@ -1,6 +1,7 @@
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
+
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -20,6 +21,7 @@ public class LoginPage {
         $(Locators.get("LoginLink")).setValue(login);
         $(Locators.get("PasswordLink")).setValue(password)
                 .pressEnter();
+
     }
 
 
