@@ -11,11 +11,11 @@ public class AssertSendPage {
 
     public static final By CONFIRMATION_SEND_LETTER = Locators.get("Confirmationsendletter");
 
-    public static void assertsendletter(WebDriver driver, String expectedSubject) {
-
+    public static void assertsendletter(WebDriver driver, String expectedSubject) throws InterruptedException {
+        Thread.sleep(5000);
         WebElement sendedbutton = driver.findElement(SEND_LINK);
         sendedbutton.click();
-//Doesn't work
+        Thread.sleep(5000);
         Assert.assertEquals(driver.findElements(CONFIRMATION_SEND_LETTER).get(0).getText(), expectedSubject);
 
 

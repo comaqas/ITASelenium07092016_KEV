@@ -9,25 +9,24 @@ import org.testng.Assert;
 public class AssertEntrancePage {
 
         public static final By ENTRANCE_LINK = Locators.get("entrance");
-    public static final By CONFIRMATION_SEND_LETTER = Locators.get("Confirmationsendletter");
+    public static final By CONFIRMATION_INPUT_LETTER = Locators.get("inputLettersSubjects");
     public static final By SELECT_FIRST_LETTER = Locators.get("selectfirstletter");
     public static final By DELETE_LINK = Locators.get("delete");
 
 
 
-        public static void assertsendletter(WebDriver driver,  String expectedSubject) {
-
+        public static void assertsendletter(WebDriver driver,  String expectedSubject) throws InterruptedException {
+            Thread.sleep(5000);
             WebElement entrancebutton = driver.findElement(ENTRANCE_LINK);
             entrancebutton.click();
+            Thread.sleep(5000);
+            String subjec = driver.findElements(CONFIRMATION_INPUT_LETTER).get(0).getText();
+            Assert.assertEquals(driver.findElements(CONFIRMATION_INPUT_LETTER).get(0).getText(), expectedSubject);
+            WebElement letter = driver.findElements(SELECT_FIRST_LETTER).get(0);
+            letter.click();
 
-//Doesn't work assert
-            //Assert.assertEquals(driver.findElements(CONFIRMATION_SEND_LETTER).get(0).getText(), expectedSubject);
-//Doesn't work. Can't click first checkbox
-           //WebElement letter = driver.findElement(SELECT_FIRST_LETTER);
-           //letter.click();
-
-           WebElement deletebutton = driver.findElement(DELETE_LINK);
-           deletebutton.click();
+            WebElement deletebutton = driver.findElement(DELETE_LINK);
+            deletebutton.click();
 
         }
 
